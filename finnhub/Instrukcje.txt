@@ -1,0 +1,50 @@
+Uruchamiamy normalnie wszystko i później aby stworzyć odpowiednie foldery itd.:
+-- KAFKA
+cd /usr/local/kafka/
+w osobnym terminale puszczamy: bin/kafka-server-start.sh config/server.properties
+bin/kafka-topics.sh --create --replication-factor 1 --partitions 3 --topic finnhub_trades --bootstrap-server localhost:9092
+sprawdzamy czy istnieje: bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+-- SKRYPT .py (tam są jak na razie wrzucone pare symboli do śledzenia, jeśli chcielibyśmy inne to wystarczy dopisać je w skryptcie, mx może ich być 50 chyba)
+Wrzucamy do folderu na maszynie wirtualnej: home/vagrant/project
+W terminalu puszczamy: pip install websocket-client kafka-python
+
+-- HDFS
+hdfs dfs -mkdir -p /user/vagrant/finnhub_trades
+
+-- HBASE (tu do przemyślenia jeszcze,
+hbase shell
+create 'finnhub_trades_latest', 'd'
+exit
+
+-- NIFI
+Plik osobny wrzucamy do nifi
+
+
+-------------------------------------------------------------------------------
+-- SPRAWDZENIE CZY DZIALA PYTHON + KAFKA
+- W folderze home/vagrant/project: python finnhub_ws_to_kafka.py
+- I później w innym terminalu można zobaczyc w kafce co przesylamy: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic finnhub_trades --from-beginning
+- Aby zatrzymac to tam w terminalu gdzie uruchomiliśmy plik .py klikamy CTRL+C
+
+
+-- URUCHOMIENIE WSZYSTKIEGO
+- w innym terminalu:
+cd /usr/local/kafka/
+bin/kafka-server-start.sh config/server.properties
+- Uruchamiamy w nifi 
+- teraz cd ~/project
+python finnhub_ws_to_kafka.py
+
+-- TEST CZY DZIALA:
+- w osobnym terminalu test kafki: bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic finnhub_trades --from-beginning
+- hdfs: hdfs dfs -ls /user/vagrant/finnhub_trades
+- HBase: 
+hbase shell
+count 'finnhub_trades_latest'
+scan 'finnhub_trades_latest', {LIMIT => 5}
+exit
+
+
+
+
