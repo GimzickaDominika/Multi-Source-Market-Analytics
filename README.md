@@ -1,6 +1,6 @@
 # Multi-Source Market Analytics
 
----
+
 
 ## Overview
 
@@ -9,7 +9,6 @@ The system combines **real-time streaming data** with **historical, fundamental,
 
 The platform is built around modern **Big Data and data engineering technologies**, with a strong focus on scalability, fault tolerance, and analytical flexibility.
 
----
 
 ## Project Goals
 
@@ -20,7 +19,7 @@ The main objectives of this project are to:
 * Generate **enriched analytical datasets** for quantitative analysis, monitoring, and decision support
 * Demonstrate practical analytical use cases such as **real-time indicators**, **anomaly detection**, and **macroeconomic impact analysis**
 
----
+
 
 ## Data Sources
 
@@ -38,7 +37,7 @@ The platform integrates multiple external data providers:
 
 Each data source differs in update frequency, structure, and latency, making **data normalization and enrichment** a core challenge of the system.
 
----
+
 
 ## Architecture Overview
 
@@ -64,7 +63,7 @@ The system follows a **layered architecture**:
 * Aggregations, joins, and anomaly detection
 * Creation of analytical tables ready for BI tools or downstream models
 
----
+
 
 ## Example Analytical Use Cases
 
@@ -82,7 +81,7 @@ Detection of abnormal trading activity by comparing real-time volume aggregates 
 
 Measuring the effect of macroeconomic data releases on asset prices and trading volume across different asset classes.
 
----
+
 
 ## Technologies Used
 
@@ -94,7 +93,7 @@ Measuring the effect of macroeconomic data releases on asset prices and trading 
 * HBase
 * Python
 
----
+
 
 ## Intended Use
 
